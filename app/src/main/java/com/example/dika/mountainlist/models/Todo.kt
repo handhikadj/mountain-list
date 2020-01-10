@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding.models
+package com.example.dika.mountainlist.models
 
 data class Todo (
     val userId: Int,

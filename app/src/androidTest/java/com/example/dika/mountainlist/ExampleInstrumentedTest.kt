@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding
+package com.example.dika.mountainlist
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

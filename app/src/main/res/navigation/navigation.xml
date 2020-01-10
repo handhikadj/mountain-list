@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.dika.submissiondicoding.views.HomeFragment"
+        android:name="com.example.dika.mountainlist.views.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment2"
-        android:name="com.example.dika.submissiondicoding.views.AboutFragment"
+        android:name="com.example.dika.mountainlist.views.AboutFragment"
         android:label="About Me"
         tools:layout="@layout/fragment_about">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.dika.submissiondicoding.views.DetailFragment"
+        android:name="com.example.dika.mountainlist.views.DetailFragment"
         android:label="Detail User"
         tools:layout="@layout/fragment_detail">
         <action

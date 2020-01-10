@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding.adapter
+package com.example.dika.mountainlist.adapter
 
 import android.view.View
 import android.widget.ImageView
@@ -6,8 +6,8 @@ import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.dika.submissiondicoding.R
-import com.example.dika.submissiondicoding.network.ApiStatus
+import com.example.dika.mountainlist.R
+import com.example.dika.mountainlist.network.ApiStatus
 
 object AdapterUtil {
     @BindingAdapter("imageUrl")

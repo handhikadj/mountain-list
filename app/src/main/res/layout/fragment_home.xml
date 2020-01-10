@@ -7,7 +7,7 @@
 
         <variable
             name="homeViewModel"
-            type="com.example.dika.submissiondicoding.viewmodels.HomeFragmentViewModel" />
+            type="com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel" />
 
     </data>
 

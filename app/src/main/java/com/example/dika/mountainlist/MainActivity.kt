@@ -1,11 +1,11 @@
-package com.example.dika.submissiondicoding
+package com.example.dika.mountainlist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.dika.submissiondicoding.databinding.ActivityMainBinding
+import com.example.dika.mountainlist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

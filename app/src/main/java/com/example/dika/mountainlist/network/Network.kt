@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding.network
+package com.example.dika.mountainlist.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

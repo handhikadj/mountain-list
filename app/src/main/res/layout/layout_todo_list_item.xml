@@ -6,7 +6,7 @@
 
         <variable
             name="todo"
-            type="com.example.dika.submissiondicoding.models.Todo" />
+            type="com.example.dika.mountainlist.models.Todo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

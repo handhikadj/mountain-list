@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding.views
+package com.example.dika.mountainlist.views
 
 
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.dika.submissiondicoding.R
+import com.example.dika.mountainlist.R
 
 /**
  * A simple [Fragment] subclass.

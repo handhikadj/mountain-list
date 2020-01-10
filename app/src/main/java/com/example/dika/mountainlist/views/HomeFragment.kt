@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding.views
+package com.example.dika.mountainlist.views
 
 import android.os.Bundle
 import android.view.*
@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dika.submissiondicoding.R
-import com.example.dika.submissiondicoding.adapter.TodoListAdapter
-import com.example.dika.submissiondicoding.databinding.FragmentHomeBinding
-import com.example.dika.submissiondicoding.viewmodels.HomeFragmentViewModel
+import com.example.dika.mountainlist.R
+import com.example.dika.mountainlist.adapter.TodoListAdapter
+import com.example.dika.mountainlist.databinding.FragmentHomeBinding
+import com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel
 
 /**
  * A simple [Fragment] subclass.

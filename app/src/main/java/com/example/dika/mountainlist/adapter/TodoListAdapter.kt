@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding.adapter
+package com.example.dika.mountainlist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dika.submissiondicoding.R
-import com.example.dika.submissiondicoding.databinding.LayoutTodoListItemBinding
-import com.example.dika.submissiondicoding.models.Todo
+import com.example.dika.mountainlist.R
+import com.example.dika.mountainlist.databinding.LayoutTodoListItemBinding
+import com.example.dika.mountainlist.models.Todo
 
 class TodoListAdapter :
     PagedListAdapter<Todo, TodoListAdapter.TodosViewHolder>(TodoListDiffCallback()) {

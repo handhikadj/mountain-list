@@ -1,16 +1,14 @@
-package com.example.dika.submissiondicoding.views
+package com.example.dika.mountainlist.views
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import com.example.dika.submissiondicoding.R
-import com.example.dika.submissiondicoding.databinding.FragmentDetailBinding
+import com.example.dika.mountainlist.R
+import com.example.dika.mountainlist.databinding.FragmentDetailBinding
 
 /**
  * A simple [Fragment] subclass.

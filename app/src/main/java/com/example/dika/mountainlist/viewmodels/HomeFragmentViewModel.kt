@@ -1,14 +1,14 @@
-package com.example.dika.submissiondicoding.viewmodels
+package com.example.dika.mountainlist.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.example.dika.submissiondicoding.datasource.TodoDataSource
-import com.example.dika.submissiondicoding.datasource.TodoDataSourceFactory
-import com.example.dika.submissiondicoding.models.Todo
-import com.example.dika.submissiondicoding.network.ApiStatus
+import com.example.dika.mountainlist.datasource.TodoDataSource
+import com.example.dika.mountainlist.datasource.TodoDataSourceFactory
+import com.example.dika.mountainlist.models.Todo
+import com.example.dika.mountainlist.network.ApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

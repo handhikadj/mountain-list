@@ -1,4 +1,4 @@
-package com.example.dika.submissiondicoding
+package com.example.dika.mountainlist
 
 import org.junit.Test
 
