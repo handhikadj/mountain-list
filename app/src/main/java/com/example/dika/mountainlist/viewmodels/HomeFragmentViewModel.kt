@@ -37,7 +37,7 @@ class HomeFragmentViewModel : ViewModel() {
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(true)
-            .setPageSize(10)
+            .setPageSize(30)
             .build()
 
         todoDataSource = todoDataSourceFactory.todoLiveDataSourceFactory

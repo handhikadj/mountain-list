@@ -6,5 +6,8 @@ import retrofit2.http.Query
 
 interface TodoApi {
     @GET("todos")
-    suspend fun getAllTodos(@Query("_page") onPage: Int): List<Todo>
+    suspend fun getAllTodos(
+        @Query("_page") onPage: Int,
+        @Query("_limit") limit: Int = 30
+    ): List<Todo>
 }
