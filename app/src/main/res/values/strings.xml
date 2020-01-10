@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Mountain List</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nama">Handika Dwi Julianto</string>
+    <string name="email">handikadwi67@gmail.com</string>
+    <string name="foto_wajah">Foto Wajah</string>
+    <string name="button1">Go To Detail</string>
+    <string name="button2">Go To Home</string>
+    <string name="user_icon">User Icon</string>
+    <string name="title_text">Title Text</string>
+    <string name="description_text">Description Text</string>
+    <string name="tulisan">Tulisan</string>
+    <string name="mountain_id">Mountain Id</string>
+    <string name="mountain_img">Mountain Image</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+</resources>
