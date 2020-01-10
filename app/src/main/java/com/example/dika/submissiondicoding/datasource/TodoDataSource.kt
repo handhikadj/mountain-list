@@ -1,14 +1,17 @@
 package com.example.dika.submissiondicoding.datasource
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.example.dika.submissiondicoding.models.Todo
+import com.example.dika.submissiondicoding.network.ApiStatus
 import com.example.dika.submissiondicoding.repositories.TodoRepository
 import kotlinx.coroutines.*
 
 class TodoDataSource(
     private val job: Job,
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
+    var _status: MutableLiveData<ApiStatus>
 ) : PageKeyedDataSource<String, Todo>() {
     private var firstPage: Int = 1
 
@@ -20,6 +23,7 @@ class TodoDataSource(
             val todoData = withContext(Dispatchers.IO) {
                 TodoRepository().connect.getAllTodos(firstPage)
             }
+            _status.value = ApiStatus.DONE
             callback.onResult(todoData, null, firstPage.toString())
         }
     }

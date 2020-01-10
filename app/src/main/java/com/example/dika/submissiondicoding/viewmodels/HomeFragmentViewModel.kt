@@ -30,8 +30,9 @@ class HomeFragmentViewModel : ViewModel() {
         get() = _navigateToDetail
 
     init {
+        _status.value = ApiStatus.LOADING
         val todoDataSourceFactory = TodoDataSourceFactory(
-            job, scope, _todoDataSourceFactory
+            job, scope, _todoDataSourceFactory, _status
         )
 
         val config = PagedList.Config.Builder()
