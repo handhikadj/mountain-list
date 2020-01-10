@@ -11,26 +11,23 @@ import com.example.dika.submissiondicoding.R
 import com.example.dika.submissiondicoding.databinding.LayoutTodoListItemBinding
 import com.example.dika.submissiondicoding.models.Todo
 
-class TodoListAdapter(
-    val clickListener: TodoListAdapterOnClickListener
-) : PagedListAdapter<Todo, TodoListAdapter.TodosViewHolder>(TodoListDiffCallback()) {
+class TodoListAdapter: PagedListAdapter<Todo, TodoListAdapter.TodosViewHolder>(TodoListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodosViewHolder {
         return TodosViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
-        val data = getItem(position)
-        data?.let {
-            holder.bind(it, clickListener)
+        val todoData = getItem(position)
+        todoData?.let {
+            holder.bind(it)
         }
     }
 
     class TodosViewHolder(var recyclerItem: LayoutTodoListItemBinding) :
         RecyclerView.ViewHolder(recyclerItem.root) {
-        fun bind(item: Todo, clickListener: TodoListAdapterOnClickListener) {
+        fun bind(item: Todo) {
             recyclerItem.todo = item
-            recyclerItem.clickListener = clickListener
             recyclerItem.executePendingBindings()
         }
 

@@ -1,19 +1,16 @@
 package com.example.dika.submissiondicoding.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dika.submissiondicoding.R
 import com.example.dika.submissiondicoding.adapter.TodoListAdapter
-import com.example.dika.submissiondicoding.adapter.TodoListAdapterOnClickListener
 import com.example.dika.submissiondicoding.databinding.FragmentHomeBinding
 import com.example.dika.submissiondicoding.viewmodels.HomeFragmentViewModel
 
@@ -39,47 +36,19 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        // val onClickAdapter = MountainListAdapter(MountainListAdapterOnClickListener {
-        //     homeFragmentViewModel.navigateToDetail(it)
-        // })
+        val todoListAdapter = TodoListAdapter()
 
-        val onClickAdapter = TodoListAdapter(TodoListAdapterOnClickListener {
-            homeFragmentViewModel.navigateToDetail(it)
+        homeFragmentViewModel.todoPagedList.observe(viewLifecycleOwner, Observer {
+            todoListAdapter.submitList(it)
         })
-
-        homeFragmentViewModel.navigateToDetail.observe(this, Observer {
-            it?.let {
-                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
-                action.id = it
-                if (this.findNavController().currentDestination?.id === R.id.homeFragment) {
-                    this.findNavController().navigate(action)
-                    homeFragmentViewModel.navigatedToDetail()
-                }
-            }
-        })
-
-        homeFragmentViewModel.getTodo()
 
         binding.mountainRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            adapter = onClickAdapter
+            adapter = todoListAdapter
         }
 
-        // homeFragmentViewModel.mountainListData.observe(this, Observer {
-        //     it.apply {
-        //         onClickAdapter.submitList(it.dataList)
-        //     }
-        // })
-
-        homeFragmentViewModel.todoListData.observe(viewLifecycleOwner, Observer {
-            it?.apply {
-                onClickAdapter.submitList(it)
-            }
-        })
-
         return binding.root
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

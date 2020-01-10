@@ -17,16 +17,6 @@
         android:layout_height="match_parent"
         tools:context=".views.HomeFragment">
 
-        <ProgressBar
-            android:id="@+id/progress_spinner"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            apiStatus="@{homeViewModel.status}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mountain_recycler_view"
             android:layout_width="409dp"

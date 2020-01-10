@@ -7,10 +7,6 @@
         <variable
             name="todo"
             type="com.example.dika.submissiondicoding.models.Todo" />
-
-        <variable
-            name="clickListener"
-            type="com.example.dika.submissiondicoding.adapter.TodoListAdapterOnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +20,6 @@
             android:layout_marginBottom="16dp"
             android:checkable="true"
             android:clickable="true"
-            android:onClick="@{() -> clickListener.onClick(todo)}"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:contentPadding="10dp"
@@ -41,7 +36,7 @@
                     android:id="@+id/recycler_title_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{todo.title, default=inititlenya}"
+                    android:text="@{@string/formatterlist(todo.id, todo.title), default=inititlenya}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

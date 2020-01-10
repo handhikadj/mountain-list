@@ -3,23 +3,23 @@ package com.example.dika.submissiondicoding.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.dika.submissiondicoding.datasource.MountainDataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.example.dika.submissiondicoding.datasource.TodoDataSource
+import com.example.dika.submissiondicoding.datasource.TodoDataSourceFactory
 import com.example.dika.submissiondicoding.models.Todo
 import com.example.dika.submissiondicoding.network.ApiStatus
-import com.example.dika.submissiondicoding.repositories.TodoRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Job
 
 class HomeFragmentViewModel : ViewModel() {
-    private var _mountainListData = MutableLiveData<MountainDataSource>()
-    val mountainListData: LiveData<MountainDataSource>
-        get() = _mountainListData
+    private val job = Job()
+    private val scope = CoroutineScope(Dispatchers.Main + job)
 
-    private var _todoListData = MutableLiveData<List<Todo>>()
-    val todoListData: LiveData<List<Todo>>
-        get() = _todoListData
+    private var _todoDataSourceFactory = MutableLiveData<TodoDataSource>()
+    var todoPagedList: LiveData<PagedList<Todo>>
+    var todoDataSource: LiveData<TodoDataSource>
 
     private var _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus>
@@ -30,22 +30,20 @@ class HomeFragmentViewModel : ViewModel() {
         get() = _navigateToDetail
 
     init {
-        _mountainListData.value = MountainDataSource()
+        val todoDataSourceFactory = TodoDataSourceFactory(
+            job, scope, _todoDataSourceFactory
+        )
+
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(true)
+            .setPageSize(10)
+            .build()
+
+        todoDataSource = todoDataSourceFactory.todoLiveDataSourceFactory
+
+        todoPagedList = LivePagedListBuilder(todoDataSourceFactory, config).build()
     }
 
-    fun getTodo() {
-        _status.value = ApiStatus.LOADING
-        viewModelScope.launch {
-            _todoListData.value = getTodoFromService()
-            _status.value = ApiStatus.DONE
-        }
-    }
-
-    private suspend fun getTodoFromService(): List<Todo> {
-        return withContext(Dispatchers.IO) {
-            TodoRepository().connect.getAllTodos(5)
-        }
-    }
 
     fun navigateToDetail(id: Int) {
         _navigateToDetail.value = id
@@ -53,6 +51,5 @@ class HomeFragmentViewModel : ViewModel() {
 
     fun navigatedToDetail() {
         _navigateToDetail.value = null
-        _todoListData.value = null
     }
 }
