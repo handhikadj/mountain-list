@@ -29,6 +29,10 @@ class HomeFragmentViewModel : ViewModel() {
     val navigateToDetail: LiveData<Int>
         get() = _navigateToDetail
 
+    private var _showNotif = MutableLiveData<Int>()
+    val showNotif: LiveData<Int>
+        get() = _showNotif
+
     init {
         _status.value = ApiStatus.LOADING
         val todoDataSourceFactory = TodoDataSourceFactory(
@@ -45,6 +49,9 @@ class HomeFragmentViewModel : ViewModel() {
         todoPagedList = LivePagedListBuilder(todoDataSourceFactory, config).build()
     }
 
+    fun showNotification(id: Int) {
+        _showNotif.value = id
+    }
 
     fun navigateToDetail(id: Int) {
         _navigateToDetail.value = id

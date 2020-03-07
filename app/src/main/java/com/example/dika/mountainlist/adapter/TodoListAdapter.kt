@@ -10,7 +10,7 @@ import com.example.dika.mountainlist.R
 import com.example.dika.mountainlist.databinding.LayoutTodoListItemBinding
 import com.example.dika.mountainlist.models.Todo
 
-class TodoListAdapter :
+class TodoListAdapter(val clickListener: TodoListAdapterOnClickListener) :
     PagedListAdapter<Todo, TodoListAdapter.TodosViewHolder>(TodoListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodosViewHolder {
@@ -20,14 +20,15 @@ class TodoListAdapter :
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
         val todoData = getItem(position)
         todoData?.let {
-            holder.bind(it)
+            holder.bind(clickListener, it)
         }
     }
 
     class TodosViewHolder(var recyclerItem: LayoutTodoListItemBinding) :
         RecyclerView.ViewHolder(recyclerItem.root) {
-        fun bind(item: Todo) {
+        fun bind(clickListener: TodoListAdapterOnClickListener, item: Todo) {
             recyclerItem.todo = item
+            recyclerItem.clickListener = clickListener
             recyclerItem.executePendingBindings()
         }
 
