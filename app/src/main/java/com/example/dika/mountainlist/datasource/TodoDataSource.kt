@@ -1,5 +1,6 @@
 package com.example.dika.mountainlist.datasource
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.example.dika.mountainlist.models.Todo
@@ -22,6 +23,7 @@ class TodoDataSource(
             val todoData = withContext(Dispatchers.IO) {
                 TodoRepository().connect.getAllTodos(firstPage)
             }
+            Log.d("todoData", "$todoData")
             _status.value = ApiStatus.DONE
             callback.onResult(todoData, null, firstPage.toString())
         }
