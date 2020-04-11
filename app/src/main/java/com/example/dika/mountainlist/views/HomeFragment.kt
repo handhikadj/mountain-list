@@ -1,15 +1,13 @@
 package com.example.dika.mountainlist.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
-import android.widget.Toast.LENGTH_SHORT
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +23,7 @@ import com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel
 class HomeFragment : Fragment() {
 
     private val homeFragmentViewModel by lazy {
-        ViewModelProviders.of(this).get(HomeFragmentViewModel::class.java)
+        ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
     }
 
     override fun onCreateView(
