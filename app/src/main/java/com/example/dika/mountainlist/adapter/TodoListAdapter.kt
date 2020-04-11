@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dika.mountainlist.R
 import com.example.dika.mountainlist.databinding.LayoutTodoListItemBinding
 import com.example.dika.mountainlist.models.Todo
+import com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel
 
-class TodoListAdapter(val clickListener: TodoListAdapterOnClickListener) :
+class TodoListAdapter(val viewModel: HomeFragmentViewModel) :
     PagedListAdapter<Todo, TodoListAdapter.TodosViewHolder>(TodoListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodosViewHolder {
@@ -20,16 +21,16 @@ class TodoListAdapter(val clickListener: TodoListAdapterOnClickListener) :
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
         val todoData = getItem(position)
         todoData?.let {
-            holder.bind(clickListener, it)
+            holder.bind(viewModel, it)
         }
     }
 
-    class TodosViewHolder(var recyclerItem: LayoutTodoListItemBinding) :
-        RecyclerView.ViewHolder(recyclerItem.root) {
-        fun bind(clickListener: TodoListAdapterOnClickListener, item: Todo) {
-            recyclerItem.todo = item
-            recyclerItem.clickListener = clickListener
-            recyclerItem.executePendingBindings()
+    class TodosViewHolder(var binding: LayoutTodoListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(viewModel: HomeFragmentViewModel, item: Todo) {
+            binding.viewModel = viewModel
+            binding.todo = item
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -55,8 +56,4 @@ class TodoListDiffCallback : DiffUtil.ItemCallback<Todo>() {
     override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
         return oldItem == newItem
     }
-}
-
-class TodoListAdapterOnClickListener(val clickListener: (todoId: Int) -> Unit) {
-    fun onClick(todo: Todo) = clickListener(todo.id)
 }

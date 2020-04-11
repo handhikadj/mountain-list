@@ -23,7 +23,6 @@ class TodoDataSource(
             val todoData = withContext(Dispatchers.IO) {
                 TodoRepository().connect.getAllTodos(firstPage)
             }
-            Log.d("todoData", "$todoData")
             _status.value = ApiStatus.DONE
             callback.onResult(todoData, null, firstPage.toString())
         }

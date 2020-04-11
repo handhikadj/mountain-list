@@ -1,9 +1,9 @@
 package com.example.dika.mountainlist.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,7 +13,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dika.mountainlist.R
 import com.example.dika.mountainlist.adapter.TodoListAdapter
-import com.example.dika.mountainlist.adapter.TodoListAdapterOnClickListener
 import com.example.dika.mountainlist.databinding.FragmentHomeBinding
 import com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel
 
@@ -39,18 +38,16 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        val todoListAdapter = TodoListAdapter(TodoListAdapterOnClickListener { todoId ->
-            homeFragmentViewModel.showNotification(todoId)
-        })
-
-        homeFragmentViewModel.showNotif.observe(viewLifecycleOwner, Observer { todoId ->
-            todoId.let {
-                Toast.makeText(context, "$it", LENGTH_LONG).show()
-            }
-        })
+        val todoListAdapter = TodoListAdapter(homeFragmentViewModel)
 
         homeFragmentViewModel.todoPagedList.observe(viewLifecycleOwner, Observer {
             todoListAdapter.submitList(it)
+            Log.d("pagedlisttodo", "$it")
+        })
+
+        homeFragmentViewModel.showTodoId.observe(viewLifecycleOwner, Observer {
+            // Toast.makeText(context, "$it", Toast.LENGTH_LONG).show()
+            Log.d("todoId", "$it")
         })
 
         binding.mountainRecyclerView.apply {

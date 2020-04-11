@@ -21,6 +21,10 @@ class HomeFragmentViewModel : ViewModel() {
     var todoPagedList: LiveData<PagedList<Todo>>
     var todoDataSource: LiveData<TodoDataSource>
 
+    private var _showTodoId = MutableLiveData<Int>()
+    val showTodoId: LiveData<Int>
+        get() = _showTodoId
+
     private var _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus>
         get() = _status
@@ -59,5 +63,9 @@ class HomeFragmentViewModel : ViewModel() {
 
     fun navigatedToDetail() {
         _navigateToDetail.value = null
+    }
+
+    fun showTodoId(todoId: Int) {
+        _showTodoId.value = todoId
     }
 }

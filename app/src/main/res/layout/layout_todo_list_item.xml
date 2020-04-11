@@ -9,15 +9,15 @@
             type="com.example.dika.mountainlist.models.Todo" />
 
         <variable
-            name="clickListener"
-            type="com.example.dika.mountainlist.adapter.TodoListAdapterOnClickListener" />
+            name="viewModel"
+            type="com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> clickListener.onClick(todo)}"
+        android:onClick="@{() -> viewModel.showTodoId(todo.id)}"
         android:padding="16dp">
 
         <com.google.android.material.card.MaterialCardView
