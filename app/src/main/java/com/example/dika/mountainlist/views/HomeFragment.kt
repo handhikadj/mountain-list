@@ -1,7 +1,6 @@
 package com.example.dika.mountainlist.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -20,7 +19,6 @@ import com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel
  * A simple [Fragment] subclass.
  */
 class HomeFragment : Fragment() {
-
     private val homeFragmentViewModel by lazy {
         ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
     }
@@ -40,14 +38,16 @@ class HomeFragment : Fragment() {
 
         val todoListAdapter = TodoListAdapter(homeFragmentViewModel)
 
-        homeFragmentViewModel.todoPagedList.observe(viewLifecycleOwner, Observer {
-            todoListAdapter.submitList(it)
-            Log.d("pagedlisttodo", "$it")
+        homeFragmentViewModel.todoList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                todoListAdapter.submitList(it)
+            }
         })
 
-        homeFragmentViewModel.showTodoId.observe(viewLifecycleOwner, Observer {
-            // Toast.makeText(context, "$it", Toast.LENGTH_LONG).show()
-            Log.d("todoId", "$it")
+        homeFragmentViewModel.showNotif.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                Toast.makeText(context, "apabae", Toast.LENGTH_LONG).show()
+            }
         })
 
         binding.mountainRecyclerView.apply {

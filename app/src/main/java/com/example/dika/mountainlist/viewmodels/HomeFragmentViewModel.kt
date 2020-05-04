@@ -3,69 +3,62 @@ package com.example.dika.mountainlist.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import com.example.dika.mountainlist.datasource.TodoDataSource
-import com.example.dika.mountainlist.datasource.TodoDataSourceFactory
+import androidx.lifecycle.viewModelScope
 import com.example.dika.mountainlist.models.Todo
 import com.example.dika.mountainlist.network.ApiStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import com.example.dika.mountainlist.repositories.TodoRepository
+import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel : ViewModel() {
-    private val job = Job()
-    private val scope = CoroutineScope(Dispatchers.Main + job)
+    private var _todoList = MutableLiveData<List<Todo>>()
+    val todoList: LiveData<List<Todo>>
+        get() = _todoList
 
-    private var _todoDataSourceFactory = MutableLiveData<TodoDataSource>()
-    var todoPagedList: LiveData<PagedList<Todo>>
-    var todoDataSource: LiveData<TodoDataSource>
-
-    private var _showTodoId = MutableLiveData<Int>()
-    val showTodoId: LiveData<Int>
-        get() = _showTodoId
+    private var _onPage = MutableLiveData<Int>()
+    val onPage: LiveData<Int>
+        get() = _onPage
 
     private var _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus>
         get() = _status
 
-    private var _navigateToDetail = MutableLiveData<Int>()
-    val navigateToDetail: LiveData<Int>
-        get() = _navigateToDetail
-
-    private var _showNotif = MutableLiveData<Int>()
-    val showNotif: LiveData<Int>
+    private var _showNotif = MutableLiveData<Boolean>()
+    val showNotif: LiveData<Boolean>
         get() = _showNotif
 
     init {
+        initializeData()
+    }
+
+    private fun initializeData() {
+        _todoList.value = mutableListOf()
+        _onPage.value = 1
         _status.value = ApiStatus.LOADING
-        val todoDataSourceFactory = TodoDataSourceFactory(
-            job, scope, _todoDataSourceFactory, _status
-        )
-
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(true)
-            .setPageSize(30)
-            .build()
-
-        todoDataSource = todoDataSourceFactory.todoLiveDataSourceFactory
-
-        todoPagedList = LivePagedListBuilder(todoDataSourceFactory, config).build()
+        viewModelScope.launch {
+            val todoListData = TodoRepository().connect.getAllTodos(onPage.value!!, 15)
+            _status.value = ApiStatus.DONE
+            val existList = _todoList.value?.toMutableList() ?: mutableListOf()
+            todoListData.body()?.let {
+                existList.addAll(it)
+                _todoList.postValue(existList)
+            }
+        }
     }
 
-    fun showNotification(id: Int) {
-        _showNotif.value = id
+    fun loadMoreData() {
+        _onPage.value = onPage.value!! + 1
+        viewModelScope.launch {
+            val todoListData = TodoRepository().connect.getAllTodos(onPage.value!!, 15)
+            val existList = _todoList.value?.toMutableList() ?: mutableListOf()
+            todoListData.body()?.let {
+                existList.addAll(it)
+                _todoList.postValue(existList)
+            }
+        }
     }
 
-    fun navigateToDetail(id: Int) {
-        _navigateToDetail.value = id
-    }
-
-    fun navigatedToDetail() {
-        _navigateToDetail.value = null
-    }
-
-    fun showTodoId(todoId: Int) {
-        _showTodoId.value = todoId
+    fun showNotif() {
+        _showNotif.value = true
+        _showNotif.value = false
     }
 }

@@ -1,6 +1,7 @@
 package com.example.dika.mountainlist.adapter
 
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
@@ -29,6 +30,15 @@ object AdapterUtil {
         when(status) {
             ApiStatus.LOADING -> view.visibility = View.VISIBLE
             else -> view.visibility = View.GONE
+        }
+    }
+
+    @BindingAdapter("apiStatusSuccess")
+    @JvmStatic
+    fun loadBtnStatus(view: Button, status: ApiStatus) {
+        when(status) {
+            ApiStatus.LOADING -> view.visibility = View.GONE
+            else -> view.visibility = View.VISIBLE
         }
     }
 }

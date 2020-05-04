@@ -3,8 +3,8 @@ package com.example.dika.mountainlist.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dika.mountainlist.R
 import com.example.dika.mountainlist.databinding.LayoutTodoListItemBinding
@@ -12,7 +12,7 @@ import com.example.dika.mountainlist.models.Todo
 import com.example.dika.mountainlist.viewmodels.HomeFragmentViewModel
 
 class TodoListAdapter(val viewModel: HomeFragmentViewModel) :
-    PagedListAdapter<Todo, TodoListAdapter.TodosViewHolder>(TodoListDiffCallback()) {
+    ListAdapter<Todo, TodoListAdapter.TodosViewHolder>(TodoListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodosViewHolder {
         return TodosViewHolder.from(parent)
